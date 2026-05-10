@@ -72,10 +72,10 @@ Core ideas:
 - robot subsystems (mechanics, sensing, actuators, control)
 
 Practical task:
-- Build a "robot taxonomy demo" in Webots where multiple robot models are shown (wheeled, legged, manipulator), and document their subsystem differences.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L1_robot_types_showcase`: one world with at least 3 robot classes and a short comparison report.
+- `project name`: Describe the project.
 
 ### Lecture 2: Locomotion and Kinematics I
 
@@ -85,10 +85,10 @@ Core ideas:
 - Jacobian and end-effector velocity
 
 Practical task:
-- Implement 2-link planar arm kinematics and Jacobian-based velocity mapping.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L2_2link_kinematics_lab`: move end-effector to targets and compare analytical vs simulated motion.
+- `project name`: Describe the project.
 
 ### Lecture 3: Mobile Robot Locomotion
 
@@ -98,10 +98,10 @@ Core ideas:
 - PWM, encoders, PID closed-loop control
 
 Practical task:
-- Build a differential-drive controller using encoder feedback and tune PID for straight-line and turning performance.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L3_diff_drive_pid`: closed-loop wheel speed control with odometry logging and error plots.
+- `project name`: Describe the project.
 
 ### Lecture 4: Path Planning
 
@@ -111,10 +111,10 @@ Core ideas:
 - sampling planners (RRT, PRM)
 
 Practical task:
-- Implement grid-based A* and compare with one sampling planner (RRT or PRM) in cluttered maps.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L4_planner_benchmark`: run A* and RRT on the same world, compare path length, runtime, and clearance.
+- `project name`: Describe the project.
 
 ### Lecture 5: Trajectory
 
@@ -124,10 +124,10 @@ Core ideas:
 - smoothness, acceleration, jerk constraints
 
 Practical task:
-- Convert a geometric path into a time-parameterized trajectory and evaluate smoothness metrics.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L5_trajectory_profiles`: execute cubic vs quintic (or LSPB) and compare jerk/acceleration behavior.
+- `project name`: Describe the project.
 
 ### Lecture 6: Perception and Sensing
 
@@ -137,10 +137,10 @@ Core ideas:
 - sensor noise and sensor fusion concepts
 
 Practical task:
-- Fuse encoder + IMU for improved heading/odometry and add one exteroceptive sensor for obstacle-aware behavior.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L6_sensor_fusion_basics`: EKF-lite or complementary fusion for heading and position stabilization.
+- `project name`: Describe the project.
 
 ### Lecture 7: Localization and Navigation
 
@@ -150,10 +150,10 @@ Core ideas:
 - occupancy grids and particle filter concepts
 
 Practical task:
-- Localize a robot in a mapped corridor world using odometry + range updates.
+- The simulation task
 
 Suggested Webots mini-project:
-- `L7_particle_localization`: basic Monte Carlo localization over an occupancy grid.
+- `project name`: Describe the project.
 
 ## Main Project (To Be Given)
 
@@ -174,7 +174,7 @@ Recommended project milestones:
 5. Add localization/sensor fusion.
 6. Run end-to-end demos and record metrics.
 
-## Suggested Weekly Workflow
+## Weekly Workflow
 
 1. Read the lecture slides in `resources/`.
 2. Complete the matching practical in `practice/`.
