@@ -379,14 +379,7 @@ EOF
 cd ~/GRP2-ROBOTICS
 
 git add .
-git commit -m "Add Lecture 4 practical: A* path planning in Webots (C)
-
-- Implements A* algorithm from CSC 2207 Lecture 4 slides
-- 10x10 grid map with 10 obstacle cells
-- Differential-drive robot navigates start(0,0) to goal(9,9)
-- Odometry tracking using Lecture 3 equations
-- Standalone test (test_astar.c) passes all 3 test cases
-- Webots world file with matching physical obstacles"
+ori
 
 git remote add origin https://github.com/YOUR_USERNAME/GRP2-ROBOTICS.git
 git push -u origin main
