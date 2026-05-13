@@ -1,0 +1,35 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/pal_robotics/tiago/protos/Tiago.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/pal_robotics/tiago_extensions/protos/TiagoRobotiqGripper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/devices/hokuyo/protos/HokuyoUrg04lxug01.proto"
+
+WorldInfo {
+  physicsDisableTime 16
+}
+Viewpoint {
+  orientation -0.3297946336007402 0.09831116309807003 0.9389198127947127 2.451389949330896
+  position 6.31359153834732 -6.650957005683374 7.249249591045657
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+  wallHeight 0.5
+}
+Tiago {
+  controller "my_controller_tiago"
+  endEffectorSlot TiagoRobotiqGripper {
+    model "EPick"
+  }
+  lidarSlot [
+    HokuyoUrg04lxug01 {
+      name "lidar"
+    }
+  ]
+}
