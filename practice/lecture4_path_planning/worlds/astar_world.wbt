@@ -1,0 +1,491 @@
+#VRML_SIM R2023b utf8
+
+WorldInfo {
+  info [
+    "CSC 2207 Robotics - Lecture 4 Practical"
+    "A* Path Planning Demo"
+    "GRP2"
+  ]
+  title "A* Path Planning — Lecture 4"
+  basicTimeStep 64
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.094395
+  position -5.756442260331633e-07 3.4999994243558104 9.737414772075436
+}
+DEF FLOOR Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.9 0.9 0.85
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 1.5 1.5
+      }
+    }
+  ]
+  name "floor"
+  boundingObject Plane {
+    size 1.5 1.5
+  }
+  locked TRUE
+}
+DEF GRID_LINES Solid {
+  translation 0 0.001 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.7 0.7
+        transparency 0.5
+        roughness 1
+        metalness 0
+      }
+      geometry ElevationGrid {
+        xDimension 11
+        xSpacing 0.15
+        yDimension 11
+        ySpacing 0.15
+      }
+    }
+  ]
+  name "grid_lines"
+  locked TRUE
+}
+DEF WALL_NORTH Solid {
+  translation 0 0.05 -0.775
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.5 0.5
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1.6 0.1 0.05
+      }
+    }
+  ]
+  name "wall_north"
+  boundingObject Box {
+    size 1.6 0.1 0.05
+  }
+  locked TRUE
+}
+DEF WALL_SOUTH Solid {
+  translation 0 0.05 0.775
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.5 0.5
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1.6 0.1 0.05
+      }
+    }
+  ]
+  name "wall_south"
+  boundingObject Box {
+    size 1.6 0.1 0.05
+  }
+  locked TRUE
+}
+DEF WALL_WEST Solid {
+  translation -0.775 0.05 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.5 0.5
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.1 1.6
+      }
+    }
+  ]
+  name "wall_west"
+  boundingObject Box {
+    size 0.05 0.1 1.6
+  }
+  locked TRUE
+}
+DEF WALL_EAST Solid {
+  translation 0.775 0.05 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.5 0.5
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.05 0.1 1.6
+      }
+    }
+  ]
+  name "wall_east"
+  boundingObject Box {
+    size 0.05 0.1 1.6
+  }
+  locked TRUE
+}
+DEF OBS_R1C2 Solid {
+  translation -0.375 0.05 -0.525
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r1c2"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R1C3 Solid {
+  translation -0.225 0.05 -0.525
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r1c3"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R2C2 Solid {
+  translation -0.375 0.05 -0.375
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r2c2"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R3C2 Solid {
+  translation -0.375 0.05 -0.225
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r3c2"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R3C4 Solid {
+  translation -0.075 0.05 -0.225
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r3c4"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R3C5 Solid {
+  translation 0.075 0.05 -0.225
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r3c5"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R4C4 Solid {
+  translation -0.075 0.05 -0.075
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r4c4"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R5C6 Solid {
+  translation 0.225 0.05 0.075
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r5c6"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R5C7 Solid {
+  translation 0.375 0.05 0.075
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r5c7"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF OBS_R6C6 Solid {
+  translation 0.225 0.05 0.225
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.2 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.14 0.1 0.14
+      }
+    }
+  ]
+  name "obs_r6c6"
+  boundingObject Box {
+    size 0.14 0.1 0.14
+  }
+  locked TRUE
+}
+DEF GOAL_MARKER Solid {
+  translation 0.675 0.005 0.675
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.8 0.1
+        transparency 0.3
+        roughness 0.5
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.01
+        radius 0.07
+      }
+    }
+  ]
+  name "goal_marker"
+  locked TRUE
+}
+DEF START_MARKER Solid {
+  translation -0.675 0.005 -0.675
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.1 0.9
+        transparency 0.3
+        roughness 0.5
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.01
+        radius 0.07
+      }
+    }
+  ]
+  name "start_marker"
+  locked TRUE
+}
+Robot {
+  translation -0.6750000000018576 -347572416.1322299 18329.801861204527
+  rotation -0.033439244039119555 -0.12163012390374446 0.9920120613769028 -2.5348779874083345
+  children [
+    DEF EPUCK_BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.2 0.8
+        roughness 0.5
+        metalness 0.3
+      }
+      geometry Cylinder {
+        height 0.045
+        radius 0.037
+      }
+    }
+    DEF LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position 52179.3363841171
+        axis 0 0 1
+        anchor -0.053 0 0
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          maxVelocity 6.28
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.053 0 0
+        rotation 0 0 1 5.336393297815157
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.0205
+            }
+          }
+        ]
+        name "left_wheel"
+        boundingObject Cylinder {
+          height 0.01
+          radius 0.0205
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity 0.002394671622019851 -82579.17112372947 2.1767197538422107
+        angularVelocity 0.05535492302468113 -1.4812058986619532 6.021694085145416
+      }
+    }
+    DEF RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        position -27235.162572675647
+        axis 0 0 1
+        anchor 0.053 0 0
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          maxVelocity 6.28
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.053 0 0
+        rotation 0 0 -1 2.2666513593187245
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.0205
+            }
+          }
+        ]
+        name "right_wheel"
+        boundingObject Cylinder {
+          height 0.01
+          radius 0.0205
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity -0.002394671618810021 -82579.16451817923 2.1783886009982236
+        angularVelocity -0.02974050123660545 0.795803724430346 -3.2352611869581365
+      }
+    }
+  ]
+  name "e-puck"
+  boundingObject Cylinder {
+    height 0.045
+    radius 0.037
+  }
+  physics Physics {
+    density -1
+    mass 0.15
+  }
+  controller "astar_robot"
+  linearVelocity -1.0702827442260963e-12 -82579.16782104748 2.1775541774260034
+  angularVelocity -0.0007013112091758655 0.018764274029082106 -0.0762848570649256
+}
